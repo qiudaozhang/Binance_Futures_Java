@@ -8,17 +8,17 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class BinanceApiConstants {
 
     /**
-     * REST API base URL.
+     * REST API base URL. 生产环境的URL
      */
     public static final String API_BASE_URL = "https://fapi.binance.com";
 
     /**
-     * Streaming API base URL.
+     * Streaming API base URL. 流数据 websocket URL
      */
     public static final String WS_API_BASE_URL = "wss://fstream.binance.com/ws";
 
     /**
-     * HTTP Header to be used for API-KEY authentication.
+     * HTTP Header to be used for API-KEY authentication. 请求头需要添加的认证数据
      */
     public static final String API_KEY_HEADER = "X-MBX-APIKEY";
 
