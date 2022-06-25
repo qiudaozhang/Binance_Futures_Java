@@ -1097,6 +1097,39 @@ class RestApiRequestImpl {
         return request;
     }
 
+
+    RestApiRequest<List<PositionRisk>> getPositionRisk(String symbol) {
+        RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build().putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            List<PositionRisk> result = new LinkedList<>();
+            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
+            dataArray.forEach((item) -> {
+                PositionRisk element = new PositionRisk();
+                element.setEntryPrice(item.getBigDecimal("entryPrice"));
+                element.setLeverage(item.getBigDecimal("leverage"));
+                if (item.getString("maxNotionalValue").equals("INF")) {
+                    element.setMaxNotionalValue(Double.POSITIVE_INFINITY);
+                } else {
+                    element.setMaxNotionalValue(item.getDouble("maxNotionalValue"));
+                }
+                element.setLiquidationPrice(item.getBigDecimal("liquidationPrice"));
+                element.setMarkPrice(item.getBigDecimal("markPrice"));
+                element.setPositionAmt(item.getBigDecimal("positionAmt"));
+                element.setSymbol(item.getString("symbol"));
+                element.setIsolatedMargin(item.getString("isolatedMargin"));
+                element.setPositionSide(item.getString("positionSide"));
+                element.setMarginType(item.getString("marginType"));
+                element.setUnrealizedProfit(item.getBigDecimal("unRealizedProfit"));
+                result.add(element);
+            });
+            return result;
+        });
+        return request;
+    }
+
     RestApiRequest<List<MyTrade>> getAccountTrades(String symbol, Long startTime, Long endTime,
                                                    Long fromId, Integer limit) {
         RestApiRequest<List<MyTrade>> request = new RestApiRequest<>();

@@ -20,13 +20,13 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
 
-    private boolean proxy(){
+    private boolean proxy() {
         return requestImpl.getProxyHost() != null;
     }
 
     @Override
     public ExchangeInformation getExchangeInformation() {
-        if(proxy()){
+        if (proxy()) {
             return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
 
         }
@@ -203,6 +203,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<PositionRisk> getPositionRisk() {
         return RestApiInvoker.callSync(requestImpl.getPositionRisk());
+    }
+
+    @Override
+    public List<PositionRisk> getPositionRisk(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.getPositionRisk(symbol));
     }
 
     @Override
