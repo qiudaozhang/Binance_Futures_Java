@@ -55,6 +55,10 @@ public interface SyncRequestClient {
         return BinanceApiInternalFactory.getInstance().createSyncRequestClient(apiKey, secretKey, options);
     }
 
+    static SyncRequestClient create(String apiKey, String secretKey, String proxyHost, int proxyPort) {
+        return BinanceApiInternalFactory.getInstance().createSyncRequestClient(apiKey, secretKey,new RequestOptions(), proxyHost, proxyPort);
+    }
+
 
     /**
      * Fetch current exchange trading rules and symbol information.
@@ -173,6 +177,7 @@ public interface SyncRequestClient {
 
     /**
      * open long marker order
+     *
      * @param symbol
      * @param quantity
      * @param newClientOrderId
@@ -187,6 +192,14 @@ public interface SyncRequestClient {
      * @return
      */
     Order openMarketShort(String symbol, BigDecimal quantity, String newClientOrderId);
+
+
+    Order closeMarketLong(String symbol, BigDecimal quantity, String newClientOrderId);
+
+    Order closeMarketShort(String symbol, BigDecimal quantity, String newClientOrderId);
+
+
+    Order closeOrder(String symbol, BigDecimal quantity);
 
     /**
      * Cancel an active order.

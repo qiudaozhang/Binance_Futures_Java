@@ -14,12 +14,22 @@ public class SyncRequestImpl implements SyncRequestClient {
 
     private final RestApiRequestImpl requestImpl;
 
+
     SyncRequestImpl(RestApiRequestImpl requestImpl) {
         this.requestImpl = requestImpl;
     }
 
+
+    private boolean proxy(){
+        return requestImpl.getProxyHost() != null;
+    }
+
     @Override
     public ExchangeInformation getExchangeInformation() {
+        if(proxy()){
+            return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
+
+        }
         return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
     }
 
@@ -47,6 +57,7 @@ public class SyncRequestImpl implements SyncRequestClient {
     public List<Candlestick> getCandlestick(String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getCandlestick(symbol, interval, startTime, endTime, limit));
     }
+
 
     @Override
     public List<MarkPrice> getMarkPrice(String symbol) {
@@ -90,7 +101,7 @@ public class SyncRequestImpl implements SyncRequestClient {
 
     @Override
     public Order openMarket(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, String newClientOrderId) {
-        return postOrder(symbol, side, positionSide, OrderType.MARKET, TimeInForce.GTC, margin.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+        return postOrder(symbol, side, positionSide, OrderType.MARKET, null, margin.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
     }
 
     @Override
@@ -101,6 +112,21 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public Order openMarketShort(String symbol, BigDecimal quantity, String newClientOrderId) {
         return openMarket(symbol, OrderSide.SELL, PositionSide.SHORT, quantity, newClientOrderId);
+    }
+
+    @Override
+    public Order closeMarketLong(String symbol, BigDecimal quantity, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.SELL, PositionSide.SHORT, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order closeMarketShort(String symbol, BigDecimal quantity, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.BUY, PositionSide.LONG, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order closeOrder(String symbol, BigDecimal quantity) {
+        return null;
     }
 
     @Override

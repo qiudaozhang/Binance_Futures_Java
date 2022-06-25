@@ -1,2 +1,7 @@
 .idea
 target
+
+/**/PrivateConfig.java
+/**/PrivateConfig
+/**/*.log
+/**/logs
