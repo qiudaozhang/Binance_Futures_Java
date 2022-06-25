@@ -29,6 +29,17 @@ public class PositionRisk {
 
     private BigDecimal unrealizedProfit;
 
+
+    private BigDecimal isolatedWallet;
+
+    public BigDecimal getIsolatedWallet() {
+        return isolatedWallet;
+    }
+
+    public void setIsolatedWallet(BigDecimal isolatedWallet) {
+        this.isolatedWallet = isolatedWallet;
+    }
+
     public BigDecimal getEntryPrice() {
         return entryPrice;
     }
@@ -119,11 +130,30 @@ public class PositionRisk {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("entryPrice", entryPrice)
-                .append("leverage", leverage).append("maxNotionalValue", maxNotionalValue)
-                .append("liquidationPrice", liquidationPrice).append("markPrice", markPrice)
-                .append("positionAmt", positionAmt).append("symbol", symbol)
-                .append("unrealizedProfit", unrealizedProfit).append("isolatedMargin", isolatedMargin)
-                .append("positionSide", positionSide).append("marginType", marginType).toString();
+        return "PositionRisk{" +
+                "entryPrice=" + entryPrice +
+                ", leverage=" + leverage +
+                ", maxNotionalValue=" + maxNotionalValue +
+                ", liquidationPrice=" + liquidationPrice +
+                ", markPrice=" + markPrice +
+                ", positionAmt=" + positionAmt +
+                ", symbol='" + symbol + '\'' +
+                ", isolatedMargin='" + isolatedMargin + '\'' +
+                ", positionSide='" + positionSide + '\'' +
+                ", marginType='" + marginType + '\'' +
+                ", unrealizedProfit=" + unrealizedProfit +
+                ", isolatedWallet=" + isolatedWallet +
+                '}';
     }
+
+
+    //    @Override
+//    public String toString() {
+//        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("entryPrice", entryPrice)
+//                .append("leverage", leverage).append("maxNotionalValue", maxNotionalValue)
+//                .append("liquidationPrice", liquidationPrice).append("markPrice", markPrice)
+//                .append("positionAmt", positionAmt).append("symbol", symbol)
+//                .append("unrealizedProfit", unrealizedProfit).append("isolatedMargin", isolatedMargin)
+//                .append("positionSide", positionSide).append("marginType", marginType).toString();
+//    }
 }

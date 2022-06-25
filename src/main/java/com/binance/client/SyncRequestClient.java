@@ -56,7 +56,7 @@ public interface SyncRequestClient {
     }
 
     static SyncRequestClient create(String apiKey, String secretKey, String proxyHost, int proxyPort) {
-        return BinanceApiInternalFactory.getInstance().createSyncRequestClient(apiKey, secretKey,new RequestOptions(), proxyHost, proxyPort);
+        return BinanceApiInternalFactory.getInstance().createSyncRequestClient(apiKey, secretKey, new RequestOptions(), proxyHost, proxyPort);
     }
 
 
@@ -320,7 +320,6 @@ public interface SyncRequestClient {
     List<PositionRisk> getPositionRisk();
 
     List<PositionRisk> getPositionRisk(String symbol);
-
 
 
     /**
