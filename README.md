@@ -1,22 +1,12 @@
-# Binance Java SDK (beta version)
+## 币安合约SDK
 
-This is Binance Java SDK, This is a lightweight Java library, you can import to your Java project and use this SDK to query all market data, trading and manage your account.
-
-The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market data from the Websocket connection.
+fork 自 https://github.com/Binance-docs/Binance_Futures_Java
 
 
-## Table of Contents
+## 额外支持功能
 
-- [Beginning](#Beginning)
-  - [Installation](#Installation)
-
-
-## Beginning
-
-### Installation
-
-*The SDK is compiled by Java8*
-
-For Beta version, please import the source code in java IDE (idea or eclipse)
-
-The example code is in binance-api-sdk/java/src/test/java/com/binance/client/examples.
+- 简易的多空市价开仓
+- 简易的多空市价平仓
+- 支持设置代理，方便本地调试
+- 查询单币种余额
+- 查询单币种的持仓情况
