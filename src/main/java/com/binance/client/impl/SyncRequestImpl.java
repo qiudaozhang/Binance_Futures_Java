@@ -18,7 +18,6 @@ public class SyncRequestImpl implements SyncRequestClient {
         this.requestImpl = requestImpl;
     }
 
-
     @Override
     public ExchangeInformation getExchangeInformation() {
         return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
