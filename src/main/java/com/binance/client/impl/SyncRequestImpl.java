@@ -117,12 +117,24 @@ public class SyncRequestImpl implements SyncRequestClient {
 
     @Override
     public Order closeMarketLong(String symbol, BigDecimal quantity, String newClientOrderId) {
-        return postOrder(symbol, OrderSide.SELL, PositionSide.SHORT, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+
+        List<PositionRisk> positionRisk = getPositionRisk(symbol);
+        Optional<PositionRisk> op = positionRisk.stream().filter(c -> c.getPositionSide().equalsIgnoreCase(PositionSide.LONG.toString())).findFirst();
+        if (op.isPresent()) {
+            PositionRisk risk = op.get();
+            if (risk.getPositionAmt().compareTo(quantity) < 0) {
+                return null;
+            } else {
+                return postOrder(symbol, OrderSide.SELL, PositionSide.LONG, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+            }
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Order closeMarketShort(String symbol, BigDecimal quantity, String newClientOrderId) {
-        return postOrder(symbol, OrderSide.BUY, PositionSide.LONG, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+        return postOrder(symbol, OrderSide.BUY, PositionSide.SHORT, OrderType.MARKET, null, quantity.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
     }
 
     @Override
