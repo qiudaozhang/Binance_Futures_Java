@@ -3,13 +3,23 @@ package com.binance.client.examples.trade;
 import com.binance.client.RequestOptions;
 import com.binance.client.SyncRequestClient;
 
+import com.binance.client.examples.ClientBuilder;
 import com.binance.client.examples.constants.PrivateConfig;
+import com.binance.client.model.trade.AccountBalance;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public class GetBalance {
     public static void main(String[] args) {
-        RequestOptions options = new RequestOptions();
-        SyncRequestClient syncRequestClient = SyncRequestClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY,
-                "127.0.0.1",7890);
-        System.out.println(syncRequestClient.getBalance());
+        SyncRequestClient syncRequestClient = ClientBuilder.proxyInstance();
+        BigDecimal b = syncRequestClient.getAvailable("USDT");
+        System.out.println(b);
+//        List<AccountBalance> balance = syncRequestClient.getBalance();
+//
+//        for (AccountBalance ab : balance) {
+//            System.out.println(ab);
+//        }
+
     }
 }

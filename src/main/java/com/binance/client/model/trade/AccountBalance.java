@@ -13,6 +13,36 @@ public class AccountBalance {
 
     private BigDecimal withdrawAvailable;
 
+    private BigDecimal availableBalance;
+
+    private BigDecimal maxWithdrawAmount;
+
+    private BigDecimal crossWalletBalance;
+
+    public BigDecimal getCrossWalletBalance() {
+        return crossWalletBalance;
+    }
+
+    public void setCrossWalletBalance(BigDecimal crossWalletBalance) {
+        this.crossWalletBalance = crossWalletBalance;
+    }
+
+    public BigDecimal getAvailableBalance() {
+        return availableBalance;
+    }
+
+    public void setAvailableBalance(BigDecimal availableBalance) {
+        this.availableBalance = availableBalance;
+    }
+
+    public BigDecimal getMaxWithdrawAmount() {
+        return maxWithdrawAmount;
+    }
+
+    public void setMaxWithdrawAmount(BigDecimal maxWithdrawAmount) {
+        this.maxWithdrawAmount = maxWithdrawAmount;
+    }
+
     public String getAsset() {
         return asset;
     }
@@ -37,9 +67,21 @@ public class AccountBalance {
         this.withdrawAvailable = withdrawAvailable;
     }
 
+//    @Override
+//    public String toString() {
+//        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("asset", asset)
+//                .append("balance", balance).append("withdrawAvailable", withdrawAvailable).toString();
+//    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("asset", asset)
-                .append("balance", balance).append("withdrawAvailable", withdrawAvailable).toString();
+        return "AccountBalance{" +
+                "asset='" + asset + '\'' +
+                ", balance=" + balance +
+                ", withdrawAvailable=" + withdrawAvailable +
+                ", availableBalance=" + availableBalance +
+                ", maxWithdrawAmount=" + maxWithdrawAmount +
+                ", crossWalletBalance=" + crossWalletBalance +
+                '}';
     }
 }

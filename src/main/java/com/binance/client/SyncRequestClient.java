@@ -296,6 +296,8 @@ public interface SyncRequestClient {
      */
     List<AccountBalance> getBalance();
 
+    BigDecimal getAvailable(String symbol);
+
     /**
      * Get current account information.
      *

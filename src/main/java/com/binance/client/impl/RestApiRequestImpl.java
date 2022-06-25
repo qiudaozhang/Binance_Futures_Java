@@ -967,8 +967,21 @@ class RestApiRequestImpl {
     RestApiRequest<List<AccountBalance>> getBalance() {
         RestApiRequest<List<AccountBalance>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
-        request.request = createRequestByGetWithSignature("/fapi/v1/balance", builder);
+        request.request = createRequestByGetWithSignature("/fapi/v2/balance", builder);
 
+        /*
+        {
+        "accountAlias": "SgsR",    // unique account code
+        "asset": "USDT",    // asset name
+        "balance": "122607.35137903", // wallet balance
+        "crossWalletBalance": "23.72469206", // crossed wallet balance
+        "crossUnPnl": "0.00000000"  // unrealized profit of crossed positions
+        "availableBalance": "23.72469206",       // available balance
+        "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out
+        "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode
+        "updateTime": 1617939110373
+    }
+         */
         request.jsonParser = (jsonWrapper -> {
             List<AccountBalance> result = new LinkedList<>();
             JsonWrapperArray dataArray = jsonWrapper.getJsonArray("data");
@@ -976,7 +989,9 @@ class RestApiRequestImpl {
                 AccountBalance element = new AccountBalance();
                 element.setAsset(item.getString("asset"));
                 element.setBalance(item.getBigDecimal("balance"));
-                element.setWithdrawAvailable(item.getBigDecimal("withdrawAvailable"));
+                element.setAvailableBalance(item.getBigDecimal("availableBalance"));
+                element.setMaxWithdrawAmount(item.getBigDecimal("maxWithdrawAmount"));
+                element.setCrossWalletBalance(item.getBigDecimal("crossWalletBalance"));
                 result.add(element);
             });
             return result;
@@ -1068,7 +1083,7 @@ class RestApiRequestImpl {
     RestApiRequest<List<PositionRisk>> getPositionRisk() {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
-        request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
+        request.request = createRequestByGetWithSignature("/fapi/v2/positionRisk", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<PositionRisk> result = new LinkedList<>();
@@ -1101,7 +1116,7 @@ class RestApiRequestImpl {
     RestApiRequest<List<PositionRisk>> getPositionRisk(String symbol) {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build().putToUrl("symbol", symbol);
-        request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
+        request.request = createRequestByGetWithSignature("/fapi/v2/positionRisk", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<PositionRisk> result = new LinkedList<>();

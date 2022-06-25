@@ -9,6 +9,7 @@ import com.binance.client.model.trade.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class SyncRequestImpl implements SyncRequestClient {
 
@@ -188,6 +189,17 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public List<AccountBalance> getBalance() {
         return RestApiInvoker.callSync(requestImpl.getBalance());
+    }
+
+    @Override
+    public BigDecimal getAvailable(String symbol) {
+        List<AccountBalance> balance = getBalance();
+        Optional<AccountBalance> op = balance.stream().filter(c -> c.getAsset().equalsIgnoreCase(symbol)).findFirst();
+        if (op.isPresent()) {
+            return op.get().getAvailableBalance();
+        } else {
+            return BigDecimal.ZERO;
+        }
     }
 
     @Override
