@@ -392,4 +392,15 @@ public interface SyncRequestClient {
      */
     List<TakerLongShortStat> getTakerLongShortRatio(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit);
 
+    /**
+     * 获取当前时间周期多空持仓币的单个数据
+     *
+     * @param symbol
+     * @param period
+     * @return
+     */
+    default TakerLongShortStat getTakerLongShortRatio(String symbol, PeriodType period) {
+        return getTakerLongShortRatio(symbol, period, null, null, 1).get(0);
+    }
+
 }
