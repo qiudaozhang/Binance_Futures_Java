@@ -474,22 +474,14 @@ class WebsocketRequestImpl {
                     BalanceUpdate balance = new BalanceUpdate();
                     balance.setAsset(item.getString("a"));
                     balance.setWalletBalance(item.getBigDecimal("wb"));
+                    balance.setCw(item.getBigDecimal("cw"));
+                    balance.setWb(item.getBigDecimal("wb"));
                     balanceList.add(balance);
                 });
                 accountUpdate.setBalances(balanceList);
 
                 List<PositionUpdate> positionList = new LinkedList<>();
                 JsonWrapperArray datalist = jsonWrapper.getJsonObject("a").getJsonArray("B");
-                datalist.forEach(item -> {
-                    PositionUpdate position = new PositionUpdate();
-                    // 可能这里解析有问题
-                    position.setAmount(item.getBigDecimal("pa"));
-                    position.setEntryPrice(item.getBigDecimal("ep"));
-                    position.setPreFee(item.getBigDecimal("cr"));
-                    position.setUnrealizedPnl(item.getBigDecimal("up"));
-                    positionList.add(position);
-                });
-                accountUpdate.setPositions(positionList);
                 result.setAccountUpdate(accountUpdate);
 
             } else if (jsonWrapper.getString("e").equals("ORDER_TRADE_UPDATE")) {

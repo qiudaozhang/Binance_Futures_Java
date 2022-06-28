@@ -11,6 +11,26 @@ public class BalanceUpdate {
 
     private BigDecimal walletBalance;
 
+
+    private BigDecimal cw;
+    private BigDecimal wb;
+
+    public BigDecimal getCw() {
+        return cw;
+    }
+
+    public void setCw(BigDecimal cw) {
+        this.cw = cw;
+    }
+
+    public BigDecimal getWb() {
+        return wb;
+    }
+
+    public void setWb(BigDecimal wb) {
+        this.wb = wb;
+    }
+
     public String getAsset() {
         return asset;
     }
