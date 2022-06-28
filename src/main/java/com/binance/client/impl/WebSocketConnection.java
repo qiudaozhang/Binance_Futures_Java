@@ -36,8 +36,7 @@ public class WebSocketConnection extends WebSocketListener {
 
     private String subscriptionUrl = BinanceApiConstants.WS_API_BASE_URL;
 
-    WebSocketConnection(WebsocketRequest request,
-            WebSocketWatchDog watchDog) {
+    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog) {
         this(request, watchDog, false);
     }
 
@@ -46,8 +45,7 @@ public class WebSocketConnection extends WebSocketListener {
         this.request = request;
         this.autoClose = autoClose;
 
-        this.okhttpRequest = request.authHandler == null ? new Request.Builder().url(subscriptionUrl).build()
-                : new Request.Builder().url(subscriptionUrl).build();
+        this.okhttpRequest = request.authHandler == null ? new Request.Builder().url(subscriptionUrl).build() : new Request.Builder().url(subscriptionUrl).build();
         this.watchDog = watchDog;
         log.info("[Sub] Connection [id: " + this.connectionId + "] created for " + request.name);
     }
@@ -125,10 +123,6 @@ public class WebSocketConnection extends WebSocketListener {
             BinanceApiException exception = new BinanceApiException(BinanceApiException.SUBSCRIPTION_ERROR, errorMessage, e);
             request.errorHandler.onError(exception);
         }
-        System.out.println("错误信息");
-        System.out.println(errorMessage);
-        System.out.println(e);
-        System.out.println(e.getLocalizedMessage());
         log.error("[Sub][" + this.connectionId + "] " + errorMessage);
     }
 

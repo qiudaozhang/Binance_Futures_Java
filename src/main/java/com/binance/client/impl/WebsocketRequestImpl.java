@@ -470,9 +470,9 @@ class WebsocketRequestImpl {
                 dataArray.forEach(item -> {
                     BalanceUpdate balance = new BalanceUpdate();
                     balance.setAsset(item.getString("a"));
-                    balance.setWalletBalance(item.getBigDecimal("wb"));
+                    balance.setBalanceChange(item.getBigDecimal("bc"));
                     balance.setCw(item.getBigDecimal("cw"));
-                    balance.setWb(item.getBigDecimal("wb"));
+                    balance.setWalletBalance(item.getBigDecimal("wb"));
                     balanceList.add(balance);
                 });
                 accountUpdate.setBalances(balanceList);
