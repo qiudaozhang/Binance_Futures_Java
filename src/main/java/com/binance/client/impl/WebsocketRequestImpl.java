@@ -463,12 +463,9 @@ class WebsocketRequestImpl {
             result.setEventType(jsonWrapper.getString("e"));
             result.setEventTime(jsonWrapper.getLong("E"));
             result.setTransactionTime(jsonWrapper.getLong("T"));
-
             if (jsonWrapper.getString("e").equals("ACCOUNT_UPDATE")) {
                 AccountUpdate accountUpdate = new AccountUpdate();
-                System.out.println("账户更新解析");
                 List<BalanceUpdate> balanceList = new LinkedList<>();
-                System.out.println(jsonWrapper);
                 JsonWrapperArray dataArray = jsonWrapper.getJsonObject("a").getJsonArray("B");
                 dataArray.forEach(item -> {
                     BalanceUpdate balance = new BalanceUpdate();
@@ -479,11 +476,7 @@ class WebsocketRequestImpl {
                     balanceList.add(balance);
                 });
                 accountUpdate.setBalances(balanceList);
-
-                List<PositionUpdate> positionList = new LinkedList<>();
-                JsonWrapperArray datalist = jsonWrapper.getJsonObject("a").getJsonArray("B");
                 result.setAccountUpdate(accountUpdate);
-
             } else if (jsonWrapper.getString("e").equals("ORDER_TRADE_UPDATE")) {
                 /*
                 2022-06-28 11:39:10 INFO  com.stepquant.listener.BinanceEventListener 64 lambda$run$0 -
@@ -519,7 +512,6 @@ class WebsocketRequestImpl {
                  */
                 OrderUpdate orderUpdate = new OrderUpdate();
                 JsonWrapper jsondata = jsonWrapper.getJsonObject("o");
-                // 这块解析没问题
                 orderUpdate.setSymbol(jsondata.getStringOrDefault("s", ""));
                 orderUpdate.setClientOrderId(jsondata.getString("c"));
                 orderUpdate.setSide(jsondata.getString("S"));
