@@ -125,6 +125,10 @@ public class WebSocketConnection extends WebSocketListener {
             BinanceApiException exception = new BinanceApiException(BinanceApiException.SUBSCRIPTION_ERROR, errorMessage, e);
             request.errorHandler.onError(exception);
         }
+        System.out.println("错误信息");
+        System.out.println(errorMessage);
+        System.out.println(e);
+        System.out.println(e.getLocalizedMessage());
         log.error("[Sub][" + this.connectionId + "] " + errorMessage);
     }
 
