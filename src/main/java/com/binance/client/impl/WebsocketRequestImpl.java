@@ -99,6 +99,7 @@ class WebsocketRequestImpl {
             result.setSymbol(jsonWrapper.getString("s"));
             JsonWrapper jsondata = jsonWrapper.getJsonObject("k");
             result.setStartTime(jsondata.getLong("t"));
+            System.out.println("102 T");
             result.setCloseTime(jsondata.getLong("T"));
             result.setSymbol(jsondata.getString("s"));
             result.setInterval(jsondata.getString("i"));
@@ -462,6 +463,7 @@ class WebsocketRequestImpl {
             UserDataUpdateEvent result = new UserDataUpdateEvent();
             result.setEventType(jsonWrapper.getString("e"));
             result.setEventTime(jsonWrapper.getLong("E"));
+            System.out.println("467 T");
             result.setTransactionTime(jsonWrapper.getLong("T"));
             if (jsonWrapper.getString("e").equals("ACCOUNT_UPDATE")) {
                 AccountUpdate accountUpdate = new AccountUpdate();
@@ -478,38 +480,6 @@ class WebsocketRequestImpl {
                 accountUpdate.setBalances(balanceList);
                 result.setAccountUpdate(accountUpdate);
             } else if (jsonWrapper.getString("e").equals("ORDER_TRADE_UPDATE")) {
-                /*
-                2022-06-28 11:39:10 INFO  com.stepquant.listener.BinanceEventListener 64 lambda$run$0 -
-                UserDataUpdateEvent[eventType=ORDER_TRADE_UPDATE,
-                eventTime=xx,accountUpdate=<null>,
-                orderUpdate=OrderUpdate
-                [symbol=ETHUSDT,
-                clientOrderId=xx,
-                side=BUY,
-                type=MARKET,
-                timeInForce=GTC,
-                origQty=0.048,
-                price=0,
-                avgPrice=0,
-                stopPrice=0,
-                executionType=NEW,
-                orderStatus=NEW,
-                orderId=xx,
-                lastFilledQty=0,
-                cumulativeFilledQty=0,
-                lastFilledPrice=0,
-                commissionAsset=,c
-                ommissionAmount=0,
-                orderTradeTime=1656387549261,
-                tradeID=0,bidsNotional=0,
-                asksNotional=0,
-                isMarkerSide=false,
-                isReduceOnly=true,
-                workingType=CONTRACT_PRICE,
-                activationPrice=0,
-                callbackRate=0]]
-
-                 */
                 OrderUpdate orderUpdate = new OrderUpdate();
                 JsonWrapper jsondata = jsonWrapper.getJsonObject("o");
                 orderUpdate.setSymbol(jsondata.getStringOrDefault("s", ""));
@@ -529,6 +499,7 @@ class WebsocketRequestImpl {
                 orderUpdate.setLastFilledPrice(jsondata.getBigDecimal("L"));
                 orderUpdate.setCommissionAsset(jsondata.getStringOrDefault("N", ""));
                 orderUpdate.setCommissionAmount(jsondata.getBigDecimalOrDefault("n", BigDecimal.ZERO));
+                System.out.println("503T");
                 orderUpdate.setOrderTradeTime(jsondata.getLong("T"));
                 orderUpdate.setTradeID(jsondata.getLong("t"));
                 orderUpdate.setBidsNotional(jsondata.getBigDecimal("b"));

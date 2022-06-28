@@ -13,11 +13,23 @@ public class SubscriptionOptions {
     private int receiveLimitMs = 300_000;
     private int connectionDelayOnFailure = 15;
 
+    private int pingInterval = 60_000;
+
+
+    public int getPingInterval() {
+        return pingInterval;
+    }
+
+    public void setPingInterval(int pingInterval) {
+        this.pingInterval = pingInterval;
+    }
+
     public SubscriptionOptions(SubscriptionOptions options) {
         this.uri = options.uri;
         this.isAutoReconnect = options.isAutoReconnect;
         this.receiveLimitMs = options.receiveLimitMs;
         this.connectionDelayOnFailure = options.connectionDelayOnFailure;
+        this.pingInterval = options.getPingInterval();
     }
 
     public SubscriptionOptions() {

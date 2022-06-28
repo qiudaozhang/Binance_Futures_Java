@@ -1,5 +1,6 @@
 package com.binance.client.impl;
 
+import com.binance.client.SubscriptionOptions;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -36,11 +37,20 @@ public class WebSocketConnection extends WebSocketListener {
 
     private String subscriptionUrl = BinanceApiConstants.WS_API_BASE_URL;
 
-    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog) {
-        this(request, watchDog, false);
+    //    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog) {
+//        this(request, watchDog, false);
+//    }
+    WebSocketConnection(WebsocketRequest request,
+
+                        SubscriptionOptions subscriptionOptions, WebSocketWatchDog watchDog) {
+
+        this(request, subscriptionOptions, watchDog, false);
     }
 
-    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog, boolean autoClose) {
+    //    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog, boolean autoClose) {
+    WebSocketConnection(WebsocketRequest request,
+                        SubscriptionOptions subscriptionOptions,
+                        WebSocketWatchDog watchDog, boolean autoClose) {
         this.connectionId = WebSocketConnection.connectionCounter++;
         this.request = request;
         this.autoClose = autoClose;
@@ -48,6 +58,11 @@ public class WebSocketConnection extends WebSocketListener {
         this.okhttpRequest = request.authHandler == null ? new Request.Builder().url(subscriptionUrl).build() : new Request.Builder().url(subscriptionUrl).build();
         this.watchDog = watchDog;
         log.info("[Sub] Connection [id: " + this.connectionId + "] created for " + request.name);
+    }
+
+
+    void ping() {
+        send("ping");
     }
 
     int getConnectionId() {
