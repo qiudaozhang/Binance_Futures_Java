@@ -1103,6 +1103,7 @@ class RestApiRequestImpl {
                 element.setSymbol(item.getString("symbol"));
                 element.setIsolatedMargin(item.getString("isolatedMargin"));
                 element.setPositionSide(item.getString("positionSide"));
+                element.setIsolatedWallet(item.getBigDecimal("isolatedWallet"));
                 element.setMarginType(item.getString("marginType"));
                 element.setUnrealizedProfit(item.getBigDecimal("unRealizedProfit"));
                 result.add(element);
