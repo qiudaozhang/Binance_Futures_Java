@@ -10,3 +10,8 @@ fork 自 https://github.com/Binance-docs/Binance_Futures_Java
 - 支持设置代理，方便本地调试
 - 查询单币种余额
 - 查询单币种的持仓情况
+
+## 开发计划
+
+- 简易的委托开单
+- 止盈止损单

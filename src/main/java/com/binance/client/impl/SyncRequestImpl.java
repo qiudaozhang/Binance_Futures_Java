@@ -107,7 +107,7 @@ public class SyncRequestImpl implements SyncRequestClient {
 
     @Override
     public Order openLimit(String symbol, OrderSide side, PositionSide positionSide, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
-        return postOrder(symbol, side, positionSide, OrderType.LIMIT, null, quantity.toString(), price.toString(),
+        return postOrder(symbol, side, positionSide, OrderType.LIMIT, TimeInForce.GTC, quantity.toString(), price.toString(),
                 null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
     }
 
