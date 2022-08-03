@@ -3,8 +3,8 @@ package com.binance.client;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.ResponseResult;
-import com.binance.client.model.market.*;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.market.*;
 import com.binance.client.model.trade.*;
 
 import java.math.BigDecimal;
@@ -174,6 +174,12 @@ public interface SyncRequestClient {
      */
     Order openMarket(String symbol, OrderSide side, PositionSide positionSide, BigDecimal quantity, String newClientOrderId);
 
+    Order openLimit(String symbol, OrderSide side, PositionSide positionSide, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
+    Order openLimitLong(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
+    Order openLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
     /**
      * 委托单
      *
@@ -185,8 +191,9 @@ public interface SyncRequestClient {
      */
     Order openDelegate(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
 
-    Order openDelegateLong(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
-    Order openDelegateShort(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
+    Order openDelegateLong(String symbol, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
+
+    Order openDelegateShort(String symbol, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
 
 
     /**

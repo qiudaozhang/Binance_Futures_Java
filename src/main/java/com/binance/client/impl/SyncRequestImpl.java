@@ -3,8 +3,8 @@ package com.binance.client.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.SyncRequestClient;
 import com.binance.client.model.ResponseResult;
-import com.binance.client.model.market.*;
 import com.binance.client.model.enums.*;
+import com.binance.client.model.market.*;
 import com.binance.client.model.trade.*;
 
 import java.math.BigDecimal;
@@ -106,19 +106,35 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public Order openLimit(String symbol, OrderSide side, PositionSide positionSide, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return postOrder(symbol, side, positionSide, OrderType.LIMIT, null, quantity.toString(), price.toString(),
+                null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order openLimitLong(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return openLimit(symbol, OrderSide.BUY, PositionSide.LONG, quantity, price, newClientOrderId);
+    }
+
+    @Override
+    public Order openLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return openLimit(symbol, OrderSide.SELL, PositionSide.SHORT, quantity, price, newClientOrderId);
+    }
+
+    @Override
     public Order openDelegate(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
         return postOrder(symbol, side, positionSide, OrderType.TAKE_PROFIT, null, margin.toString(), price.toString(), null, newClientOrderId,
                 stopPrice.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK);
     }
 
     @Override
-    public Order openDelegateLong(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
-        return openDelegate(symbol, side, PositionSide.LONG, margin, price, stopPrice, newClientOrderId);
+    public Order openDelegateLong(String symbol, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
+        return openDelegate(symbol, OrderSide.BUY, PositionSide.LONG, margin, price, stopPrice, newClientOrderId);
     }
 
     @Override
-    public Order openDelegateShort(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
-        return openDelegate(symbol, side, PositionSide.SHORT, margin, price, stopPrice, newClientOrderId);
+    public Order openDelegateShort(String symbol, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
+        return openDelegate(symbol, OrderSide.SELL, PositionSide.SHORT, margin, price, stopPrice, newClientOrderId);
     }
 
     @Override
