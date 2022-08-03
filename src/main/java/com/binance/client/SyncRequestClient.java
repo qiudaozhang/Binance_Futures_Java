@@ -174,6 +174,20 @@ public interface SyncRequestClient {
      */
     Order openMarket(String symbol, OrderSide side, PositionSide positionSide, BigDecimal quantity, String newClientOrderId);
 
+    /**
+     * 委托单
+     *
+     * @param symbol
+     * @param side
+     * @param positionSide
+     * @param newClientOrderId
+     * @return
+     */
+    Order openDelegate(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
+
+    Order openDelegateLong(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
+    Order openDelegateShort(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId);
+
 
     /**
      * open long marker order

@@ -106,6 +106,22 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public Order openDelegate(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
+        return postOrder(symbol, side, positionSide, OrderType.TAKE_PROFIT, null, margin.toString(), price.toString(), null, newClientOrderId,
+                stopPrice.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order openDelegateLong(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
+        return openDelegate(symbol, side, PositionSide.LONG, margin, price, stopPrice, newClientOrderId);
+    }
+
+    @Override
+    public Order openDelegateShort(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, BigDecimal price, BigDecimal stopPrice, String newClientOrderId) {
+        return openDelegate(symbol, side, PositionSide.SHORT, margin, price, stopPrice, newClientOrderId);
+    }
+
+    @Override
     public Order openMarketLong(String symbol, BigDecimal quantity, String newClientOrderId) {
         return openMarket(symbol, OrderSide.BUY, PositionSide.LONG, quantity, newClientOrderId);
     }
