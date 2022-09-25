@@ -17,17 +17,13 @@ public class SubscribeUserData {
         SyncRequestClient syncRequestClient = ClientBuilder.proxyInstance();
         // Start user data stream
         String listenKey = syncRequestClient.startUserDataStream();
-//        System.out.println("listenKey: " + listenKey);
+        System.out.println("listenKey: " + listenKey);
         // Keep user data stream
-        syncRequestClient.keepUserDataStream(listenKey);
-
-        // Close user data stream
-        syncRequestClient.closeUserDataStream(listenKey);
-
+//        syncRequestClient.keepUserDataStream(listenKey);
+//        syncRequestClient.closeUserDataStream(listenKey);
         SubscriptionOptions subscriptionOptions = new SubscriptionOptions();
         subscriptionOptions.setPingInterval(6000);
         SubscriptionClient client = SubscriptionClient.create(subscriptionOptions);
-
         client.subscribeUserDataEvent(listenKey, data -> {
             System.out.println("数据");
             System.out.println(data);

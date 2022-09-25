@@ -12,6 +12,7 @@ import com.binance.client.SubscriptionErrorHandler;
 import com.binance.client.SubscriptionListener;
 import com.binance.client.impl.utils.Channels;
 import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.OrderStatus;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
 import com.binance.client.model.event.LiquidationOrderEvent;
@@ -499,7 +500,6 @@ class WebsocketRequestImpl {
                 orderUpdate.setLastFilledPrice(jsondata.getBigDecimal("L"));
                 orderUpdate.setCommissionAsset(jsondata.getStringOrDefault("N", ""));
                 orderUpdate.setCommissionAmount(jsondata.getBigDecimalOrDefault("n", BigDecimal.ZERO));
-                System.out.println("503T");
                 orderUpdate.setOrderTradeTime(jsondata.getLong("T"));
                 orderUpdate.setTradeID(jsondata.getLong("t"));
                 orderUpdate.setBidsNotional(jsondata.getBigDecimal("b"));
@@ -509,6 +509,8 @@ class WebsocketRequestImpl {
                 orderUpdate.setWorkingType(jsondata.getString("wt"));
                 orderUpdate.setActivationPrice(jsondata.getBigDecimalOrDefault("AP", BigDecimal.ZERO));
                 orderUpdate.setCallbackRate(jsondata.getBigDecimalOrDefault("cr", BigDecimal.ZERO));
+                orderUpdate.setPositionSide(jsondata.getStringOrDefault("ps",""));
+                orderUpdate.setProfit(jsondata.getBigDecimalOrDefault("rp",BigDecimal.ZERO));
                 result.setOrderUpdate(orderUpdate);
             }
 

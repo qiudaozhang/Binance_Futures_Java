@@ -59,6 +59,12 @@ public class OrderUpdate {
 
     private BigDecimal callbackRate;
 
+
+    private String positionSide;
+
+
+    private BigDecimal profit;
+
     public String getSymbol() {
         return symbol;
     }
@@ -267,6 +273,22 @@ public class OrderUpdate {
         this.callbackRate = callbackRate;
     }
 
+    public String getPositionSide() {
+        return positionSide;
+    }
+
+    public void setPositionSide(String positionSide) {
+        this.positionSide = positionSide;
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
@@ -280,6 +302,8 @@ public class OrderUpdate {
                 .append("bidsNotional", bidsNotional).append("asksNotional", asksNotional)
                 .append("isMarkerSide", isMarkerSide).append("isReduceOnly", isReduceOnly)
                 .append("workingType", workingType).append("activationPrice", activationPrice)
-                .append("callbackRate", callbackRate).toString();
+                .append("callbackRate", callbackRate).append("positionSide",positionSide)
+                .append("profit",profit)
+                .toString();
     }
 }
