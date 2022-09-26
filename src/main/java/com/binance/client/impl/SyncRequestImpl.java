@@ -267,6 +267,14 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public PositionRisk getPositionRiskOne(String symbol, PositionSide side) {
+        List<PositionRisk> data = RestApiInvoker.callSync(requestImpl.getPositionRisk(symbol));
+        Optional<PositionRisk> op = data.stream().filter(d -> d.getPositionSide().equals(side.toString())).findFirst();
+        return op.orElse(null);
+    }
+
+
+    @Override
     public List<MyTrade> getAccountTrades(String symbol, Long startTime, Long endTime, Long fromId, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getAccountTrades(symbol, startTime, endTime, fromId, limit));
     }

@@ -342,6 +342,7 @@ public interface SyncRequestClient {
 
     List<PositionRisk> getPositionRisk(String symbol);
 
+    PositionRisk getPositionRiskOne(String symbol, PositionSide side);
 
     /**
      * Get trades for a specific account and symbol.
