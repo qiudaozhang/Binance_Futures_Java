@@ -332,13 +332,7 @@ public interface SyncRequestClient {
      * @return Leverage.
      */
     Leverage changeInitialLeverage(String symbol, Integer leverage);
-
-    /**
-     * 获取杠杆
-     * @return
-     */
-    List<Leverage> getLeverage(String symbol);
-
+ 
     /**
      * Get position.
      *

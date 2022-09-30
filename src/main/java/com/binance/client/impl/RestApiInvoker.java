@@ -64,7 +64,7 @@ abstract class RestApiInvoker {
             log.debug("Request URL " + request.request.url());
             Response response = client.newCall(request.request).execute();
             // System.out.println(response.body().string());
-            if (response != null && response.body() != null) {
+            if (response.body() != null) {
                 str = response.body().string();
                 response.close();
             } else {

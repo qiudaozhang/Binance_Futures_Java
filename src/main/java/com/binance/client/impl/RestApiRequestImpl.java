@@ -1,12 +1,5 @@
 package com.binance.client.impl;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.RequestOptions;
@@ -14,13 +7,17 @@ import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.ResponseResult;
+import com.binance.client.model.enums.*;
 import com.binance.client.model.market.*;
 import com.binance.client.model.trade.*;
-import com.binance.client.model.enums.*;
-
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 class RestApiRequestImpl {
 
@@ -1080,42 +1077,6 @@ class RestApiRequestImpl {
         return request;
     }
 
-
-    RestApiRequest<Leverage> getLeverage(String symbol) {
-        RestApiRequest<Leverage> request = new RestApiRequest<>();
-        UrlParamsBuilder builder = UrlParamsBuilder.build()
-                .putToUrl("symbol", symbol);
-
-        request.request = createRequestByGet("/fapi/v1/leverageBracket", builder);
-
-        request.jsonParser = (jsonWrapper -> {
-//            Leverage result = new Leverage()
-            /*
-            {
-                "bracket": 1,
-                "initialLeverage": 75,
-                "notionalCap": 10000,
-                "notionalFloor": 0,
-                "maintMarginRatio": 0.0065,
-                "cum":0
-            },
-             */
-            JsonWrapperArray brackets = jsonWrapper.getJsonArray("brackets");
-
-            return null;
-
-
-//            result.setLeverage(jsonWrapper.getBigDecimal("leverage"));
-//            if (jsonWrapper.getString("maxNotionalValue").equals("INF")) {
-//                result.setMaxNotionalValue(Double.POSITIVE_INFINITY);
-//            } else {
-//                result.setMaxNotionalValue(jsonWrapper.getDouble("maxNotionalValue"));
-//            }
-//            result.setSymbol(jsonWrapper.getString("symbol"));
-//            return result;
-        });
-        return request;
-    }
 
 
     RestApiRequest<List<PositionRisk>> getPositionRisk() {
