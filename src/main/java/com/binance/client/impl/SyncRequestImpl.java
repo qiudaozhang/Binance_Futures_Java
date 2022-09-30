@@ -257,6 +257,12 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public List<Leverage> getLeverage(String symbol) {
+
+        return RestApiInvoker.callSync(requestImpl.getLeverage(symbol));
+    }
+
+    @Override
     public List<PositionRisk> getPositionRisk() {
         return RestApiInvoker.callSync(requestImpl.getPositionRisk());
     }

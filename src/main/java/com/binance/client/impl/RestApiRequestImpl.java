@@ -1080,6 +1080,44 @@ class RestApiRequestImpl {
         return request;
     }
 
+
+    RestApiRequest<Leverage> getLeverage(String symbol) {
+        RestApiRequest<Leverage> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+
+        request.request = createRequestByGet("/fapi/v1/leverageBracket", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+//            Leverage result = new Leverage()
+            /*
+            {
+                "bracket": 1,
+                "initialLeverage": 75,
+                "notionalCap": 10000,
+                "notionalFloor": 0,
+                "maintMarginRatio": 0.0065,
+                "cum":0
+            },
+             */
+            JsonWrapperArray brackets = jsonWrapper.getJsonArray("brackets");
+
+            return null;
+
+
+//            result.setLeverage(jsonWrapper.getBigDecimal("leverage"));
+//            if (jsonWrapper.getString("maxNotionalValue").equals("INF")) {
+//                result.setMaxNotionalValue(Double.POSITIVE_INFINITY);
+//            } else {
+//                result.setMaxNotionalValue(jsonWrapper.getDouble("maxNotionalValue"));
+//            }
+//            result.setSymbol(jsonWrapper.getString("symbol"));
+//            return result;
+        });
+        return request;
+    }
+
+
     RestApiRequest<List<PositionRisk>> getPositionRisk() {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
