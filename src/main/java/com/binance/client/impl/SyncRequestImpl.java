@@ -256,6 +256,8 @@ public class SyncRequestImpl implements SyncRequestClient {
         return RestApiInvoker.callSync(requestImpl.changeInitialLeverage(symbol, leverage));
     }
 
+
+
     @Override
     public List<PositionRisk> getPositionRisk() {
         return RestApiInvoker.callSync(requestImpl.getPositionRisk());

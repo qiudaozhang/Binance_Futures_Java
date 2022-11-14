@@ -14,7 +14,7 @@ public class GetPositionRisk {
 //        SyncRequestClient syncRequestClient = SyncRequestClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY,
 //                options);
         SyncRequestClient syncRequestClient = SyncRequestClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY,
-                "127.0.0.1",7890);
+                "127.0.0.1",9981);
         List<PositionRisk> risks = syncRequestClient.getPositionRisk("ETHUSDT");
 
         for (PositionRisk risk:risks){

@@ -332,7 +332,7 @@ public interface SyncRequestClient {
      * @return Leverage.
      */
     Leverage changeInitialLeverage(String symbol, Integer leverage);
-
+ 
     /**
      * Get position.
      *
