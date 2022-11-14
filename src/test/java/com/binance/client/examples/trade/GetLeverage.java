@@ -11,6 +11,6 @@ public class GetLeverage {
 
     public static void main(String[] args) {
         SyncRequestClient syncRequestClient = ClientBuilder.proxyInstance();
-        System.out.println(syncRequestClient.getLeverage("ETHUSDT"));
+//        System.out.println(syncRequestClient.getLeverage("ETHUSDT"));
     }
 }
