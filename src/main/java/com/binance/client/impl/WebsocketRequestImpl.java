@@ -100,7 +100,6 @@ class WebsocketRequestImpl {
             result.setSymbol(jsonWrapper.getString("s"));
             JsonWrapper jsondata = jsonWrapper.getJsonObject("k");
             result.setStartTime(jsondata.getLong("t"));
-            System.out.println("102 T");
             result.setCloseTime(jsondata.getLong("T"));
             result.setSymbol(jsondata.getString("s"));
             result.setInterval(jsondata.getString("i"));
