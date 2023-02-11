@@ -348,6 +348,13 @@ public interface SyncRequestClient {
     PositionRisk getPositionRiskOne(String symbol, PositionSide side);
 
     /**
+     * 获取有值的仓位
+     * @param symbol
+     * @return
+     */
+    List<PositionRisk> getRunPositionRisk(String symbol);
+
+    /**
      * Get trades for a specific account and symbol.
      *
      * @return Trades.

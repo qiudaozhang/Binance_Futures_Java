@@ -10,6 +10,7 @@ import com.binance.client.model.trade.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SyncRequestImpl implements SyncRequestClient {
 
@@ -283,6 +284,11 @@ public class SyncRequestImpl implements SyncRequestClient {
         List<PositionRisk> data = RestApiInvoker.callSync(requestImpl.getPositionRisk(symbol));
         Optional<PositionRisk> op = data.stream().filter(d -> d.getPositionSide().equals(side.toString())).findFirst();
         return op.orElse(null);
+    }
+
+    @Override
+    public List<PositionRisk> getRunPositionRisk(String symbol) {
+        return getPositionRisk(symbol).stream().filter(c->c.getPositionAmt().compareTo(BigDecimal.ZERO) != 0).collect(Collectors.toList());
     }
 
 
