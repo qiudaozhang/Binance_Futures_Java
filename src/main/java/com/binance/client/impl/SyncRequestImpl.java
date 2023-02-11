@@ -117,8 +117,18 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public Order closeLimitLong(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return openLimit(symbol, OrderSide.SELL, PositionSide.LONG, quantity, price, newClientOrderId);
+    }
+
+    @Override
     public Order openLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
         return openLimit(symbol, OrderSide.SELL, PositionSide.SHORT, quantity, price, newClientOrderId);
+    }
+
+    @Override
+    public Order closeLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return openLimit(symbol, OrderSide.BUY, PositionSide.SHORT, quantity, price, newClientOrderId);
     }
 
     @Override

@@ -178,7 +178,10 @@ public interface SyncRequestClient {
 
     Order openLimitLong(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
 
+    Order closeLimitLong(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
     Order openLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order closeLimitShort(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
 
     /**
      * 委托单
