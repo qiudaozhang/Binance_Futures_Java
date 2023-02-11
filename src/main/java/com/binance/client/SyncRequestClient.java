@@ -210,6 +210,17 @@ public interface SyncRequestClient {
     Order openMarketLong(String symbol, BigDecimal quantity, String newClientOrderId);
 
     /**
+     * 市价止盈单
+     * @param symbol
+     * @param quantity
+     * @param price
+     * @param newClientOrderId
+     * @return
+     */
+    Order openLongProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order openShortProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
+    /**
      * @param symbol
      * @param quantity
      * @param newClientOrderId
