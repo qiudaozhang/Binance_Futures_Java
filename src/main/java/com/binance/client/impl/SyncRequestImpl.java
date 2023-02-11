@@ -102,6 +102,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public Order postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType, TimeInForce timeInForce, String quantity, String price, String reduceOnly, String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType, String closePosition) {
+        return RestApiInvoker.callSync(requestImpl.postOrder(symbol, side, positionSide, orderType, timeInForce, quantity, price, reduceOnly, newClientOrderId, stopPrice, workingType, newOrderRespType,closePosition));
+    }
+
+    @Override
     public Order openMarket(String symbol, OrderSide side, PositionSide positionSide, BigDecimal margin, String newClientOrderId) {
         return postOrder(symbol, side, positionSide, OrderType.MARKET, null, margin.toString(), null, null, newClientOrderId, null, WorkingType.MARK_PRICE, NewOrderRespType.ACK);
     }
@@ -161,6 +166,26 @@ public class SyncRequestImpl implements SyncRequestClient {
     @Override
     public Order openShortProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
         return postOrder(symbol, OrderSide.BUY, PositionSide.SHORT, OrderType.TAKE_PROFIT_MARKET, null,quantity.toString(), null, null, newClientOrderId, price.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order openLongStopMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.SELL, PositionSide.LONG, OrderType.STOP_MARKET, null,quantity.toString(), null, null, newClientOrderId, price.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order openLongStopMarketAll(String symbol, BigDecimal price, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.SELL, PositionSide.LONG, OrderType.STOP_MARKET, null,null, null, null, newClientOrderId, price.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK,"true");
+    }
+
+    @Override
+    public Order openShortStopMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.BUY, PositionSide.SHORT, OrderType.STOP_MARKET, null,quantity.toString(), null, null, newClientOrderId, price.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK);
+    }
+
+    @Override
+    public Order openShortStopMarketAll(String symbol, BigDecimal price, String newClientOrderId) {
+        return postOrder(symbol, OrderSide.BUY, PositionSide.SHORT, OrderType.STOP_MARKET, null,null, null, null, newClientOrderId, price.toString(), WorkingType.MARK_PRICE, NewOrderRespType.ACK,"true");
     }
 
     @Override

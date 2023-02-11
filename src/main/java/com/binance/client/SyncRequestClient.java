@@ -160,6 +160,9 @@ public interface SyncRequestClient {
     Order postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
                     TimeInForce timeInForce, String quantity, String price, String reduceOnly,
                     String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType);
+    Order postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
+                    TimeInForce timeInForce, String quantity, String price, String reduceOnly,
+                    String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType,String closePosition);
 
 
     /**
@@ -219,6 +222,12 @@ public interface SyncRequestClient {
      */
     Order openLongProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
     Order openShortProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+
+    Order openLongStopMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order openLongStopMarketAll(String symbol,   BigDecimal price, String newClientOrderId);
+    Order openShortStopMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order openShortStopMarketAll(String symbol,  BigDecimal price, String newClientOrderId);
+
 
     /**
      * @param symbol
