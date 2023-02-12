@@ -221,7 +221,9 @@ public interface SyncRequestClient {
      * @return
      */
     Order openLongProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order openLongProfitMarketAll(String symbol,   BigDecimal price, String newClientOrderId);
     Order openShortProfitMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
+    Order openShortProfitMarketAll(String symbol,  BigDecimal price, String newClientOrderId);
 
     Order openLongStopMarket(String symbol, BigDecimal quantity, BigDecimal price, String newClientOrderId);
     Order openLongStopMarketAll(String symbol,   BigDecimal price, String newClientOrderId);
