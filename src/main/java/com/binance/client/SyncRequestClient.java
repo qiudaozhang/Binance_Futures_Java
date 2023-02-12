@@ -1,6 +1,7 @@
 package com.binance.client;
 
 import com.alibaba.fastjson.JSONObject;
+import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.ResponseResult;
 import com.binance.client.model.enums.*;
@@ -162,7 +163,7 @@ public interface SyncRequestClient {
                     String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType);
     Order postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
                     TimeInForce timeInForce, String quantity, String price, String reduceOnly,
-                    String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType,String closePosition);
+                    String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType,String closePosition) throws BinanceApiException;
 
 
     /**
